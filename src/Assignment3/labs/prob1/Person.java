@@ -20,7 +20,7 @@ public class Person {
         return this.name.equals(p.name);
 	}
 	public static void main(String[] args) {
-		
+
 	}
 
 }
