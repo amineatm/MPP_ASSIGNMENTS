@@ -1,5 +1,9 @@
 package assignment5.prob1.gui;
 
+import assignment5.prob1.rulesets.RuleException;
+import assignment5.prob1.rulesets.RuleSet;
+import assignment5.prob1.rulesets.RuleSetFactory;
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
@@ -113,11 +117,20 @@ public class CDWindow extends JFrame {
 		titleField.setText("");
 		priceField.setText("");
 	}
+
 	class ButtonListener implements ActionListener {
-		public void actionPerformed(ActionEvent evt){
-			JOptionPane.showMessageDialog(CDWindow.this, "Still need to check CD rules!");
+		public void actionPerformed(ActionEvent evt) {
+			try {
+				RuleSet rules = RuleSetFactory.getRuleSet(CDWindow.this);
+				rules.applyRules(CDWindow.this);
+				JOptionPane.showMessageDialog(CDWindow.this, "CD data is valid!");
+			} catch (RuleException e) {
+				JOptionPane.showMessageDialog(CDWindow.this, e.getMessage(), "Rule Violation", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
+
+
 	class BackListener implements ActionListener {
 		public void actionPerformed(ActionEvent evt){
 			
