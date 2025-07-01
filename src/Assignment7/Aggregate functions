@@ -1,0 +1,25 @@
+6.12 How many hotels are there?
+
+-select count(*) from hotel
+
+
+6.13 What is the average price of a room?
+
+- select avg(price) from room
+
+
+6.14 What is the total revenue per night from all double rooms?
+
+-select sum(price) as total_revenue
+ from room
+ where type = 'double';
+
+
+6.15 How many different guests have made bookings for August?
+
+-select count(distinct guestno) as august_guest_count
+ from booking
+ where datefrom between '2023-08-01' and '2023-08-31';
+
+
+

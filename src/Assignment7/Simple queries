@@ -1,0 +1,29 @@
+6.7 List full details of all hotels.
+
+select * from hotel
+
+
+6.8 List full details of all hotels in London.
+select * from hotel where city = 'london'
+
+
+6.9 List the names and addresses of all guests living in London, alphabetically ordered by name.
+
+select distinct g.guestName, g.guestAddress from Guest g
+join Booking b on g.guestNo = b.guestNo
+join Room r on b.roomNo = r.roomNo and b.hotelNo = r.hotelNo
+join Hotel h on r.hotelNo = h.hotelNo
+where h.city = 'London'
+order by g.guestName;
+
+
+6.10 List all double or family rooms with a price below £40.00 per night, in ascending order of price.
+
+select * from room where type in ('double','family') and price < 40
+order by asc
+
+
+6.11 List the bookings for which no dateTo has been specified.
+
+select * from booking
+where dateto is null;

@@ -1,0 +1,45 @@
+6.16 List the price and type of all rooms at the Grosvenor Hotel.
+
+select price, type
+from room
+where hotelno = (
+  select hotelno from hotel
+  where hotelname = 'Grosvenor Hotel'
+);
+
+
+
+6.17 List all guests currently staying at the Grosvenor Hotel.
+
+select distinct g.*
+from guest g
+join booking b on g.guestno = b.guestno
+join room r on b.roomno = r.roomno and b.hotelno = r.hotelno
+join hotel h on r.hotelno = h.hotelno
+where h.hotelname = 'Grosvenor Hotel'
+  and '2023-08-15' between b.datefrom and b.dateto;
+
+
+
+6.18 List the details of all rooms at the Grosvenor Hotel, including the name of the guest staying in the room, if the
+room is occupied.
+
+select r.*, g.guestname
+from room r
+left join booking b on r.roomno = b.roomno and r.hotelno = b.hotelno
+left join guest g on b.guestno = g.guestno
+where r.hotelno = (
+  select hotelno from hotel
+  where hotelname = 'Grosvenor Hotel'
+);
+
+
+
+6.19 What is the total income from bookings for the Grosvenor Hotel today?
+
+select sum(r.price) as total_income
+from booking b
+join room r on b.roomno = r.roomno and b.hotelno = r.hotelno
+join hotel h on r.hotelno = h.hotelno
+where h.hotelname = 'Grosvenor Hotel'
+  and '2023-08-15' between b.datefrom and b.dateto;

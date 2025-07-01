@@ -1,0 +1,22 @@
+6.22 List the number of rooms in each hotel.
+
+select hotelno, count(*) as room_count
+from room
+group by hotelno;
+
+6.23 List the number of rooms in each hotel in London.
+
+select r.hotelno, count(*) as room_count
+from room r
+join hotel h on r.hotelno = h.hotelno
+where h.city = 'London'
+group by r.hotelno;
+
+
+
+6.24 What is the average number of bookings for each hotel in August?
+
+select hotelno, count(*) / 31 as avg_per_day
+from booking
+where datefrom between '2023-08-01' and '2023-08-31'
+group by hotelno;
